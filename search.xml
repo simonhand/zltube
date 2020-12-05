@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>博客的第一文章献给Linux</title>
+      <link href="2020/12/04/%E8%87%B4Linux/"/>
+      <url>2020/12/04/%E8%87%B4Linux/</url>
+      
+        <content type="html"><![CDATA[<h1 id="Linux的介绍以及常用的命令"><a href="#Linux的介绍以及常用的命令" class="headerlink" title="Linux的介绍以及常用的命令"></a><strong>Linux的介绍以及常用的命令</strong></h1><h2 id="linux的介绍"><a href="#linux的介绍" class="headerlink" title="linux的介绍"></a>linux的介绍</h2><p>1、简介：</p><ul><li>操作系统对与计算机来说就是它的灵魂所在，都说好看的皮囊千篇一律，有趣的灵魂万里挑一，linux对编程和项目部署都是非常nice的。<blockquote><ul><li>对于操作系统的定义就是：直接运行在计算机上的系统软件， 它是控制硬件和支持软件运行的计算机程序。</li></ul></blockquote></li></ul><p><img src="../pircture/1(1).png" alt="计算机简单的示意图"></p><h2 id="linux与windows的区别"><a href="#linux与windows的区别" class="headerlink" title="linux与windows的区别"></a>linux与windows的区别</h2><blockquote><ul><li>windows的文件目录</li></ul></blockquote><p><img src="../pircture/1(2).png"></p><blockquote><ul><li>linux的文件目录</li></ul></blockquote><p><img src="../pircture/1(3).png"></p><blockquote><ul><li>linux的目录更像像是一颗树</li></ul></blockquote><p><img src="../pircture/1(4).png"></p><blockquote><ul><li><strong>所以这样结构其实很好理解绝对路径与相对路径</strong><blockquote><p>绝对路径就是从根目录(/)这里出发，在win中就是从盘符出发的文件路径，绝对路径的好处就是基本上不会出错，但是往往路径很长，而且可移植性差。</p></blockquote></li></ul></blockquote><blockquote><blockquote><p>相对路径则是要一个参照物，而这个参照就是代码文件所处在的当前目录</p></blockquote></blockquote><pre class=" language-shell"><code class="language-shell">cd /home/zl/Desktop/1.txt # 这个就是典型的绝对路径打开桌面上的一个txt文件 cd ../static/images # 这个就是相对路径的示例，..代表上一级目录# 这里提示下~代表用户的主目录，/则是linux的根目录，# cd . 是切换到当前目录# cd - 是切换到上一次目录# </code></pre><h2 id="查看目录的命令"><a href="#查看目录的命令" class="headerlink" title="查看目录的命令"></a>查看目录的命令</h2><table><thead><tr><th>命令</th><th>说明</th></tr></thead><tbody><tr><td>ls</td><td>查看当前目录所拥有的文件或文件夹信息</td></tr><tr><td>tree</td><td>以树状方式显示目录信息</td></tr><tr><td>pwd</td><td>查看当前文件夹所在的路径</td></tr></tbody></table><ul><li>ls的选项命令</li></ul><table><thead><tr><th>命令选项</th><th>说明</th></tr></thead><tbody><tr><td>-l</td><td>以列表的形式表示</td></tr><tr><td>-h</td><td>以大小单位显示，默认时字节</td></tr><tr><td>-a</td><td>这里a意思all显示s所有的文件包括隐藏文件</td></tr></tbody></table><ul><li>ls效果图</li></ul><p><img src="../pircture/1(5).png"></p><ul><li>ls也可以多个命令选项合并在一起例如</li></ul><p><img src="../pircture/1(8).png"></p><p><img src="../pircture/1(9).png"></p><ul><li>tree效果图</li></ul><p><img src="../pircture/1(6).png"></p><ul><li>pwd效果图</li></ul><p><img src="../pircture/1(7).png"></p><ul><li>当然你觉得你的终端显示的太多东西时可选用clean来清楚一下<h2 id="常用操作文件命名"><a href="#常用操作文件命名" class="headerlink" title="常用操作文件命名"></a>常用操作文件命名</h2><table><thead><tr><th>命令</th><th>说明</th></tr></thead><tbody><tr><td>touch “文件名”</td><td>创建指定文件</td></tr><tr><td>mkdir 目录名</td><td>创建目录(文件夹)</td></tr><tr><td>rm 文件名或者目录名</td><td>删除指定文件或者目录</td></tr><tr><td>rmdir 目录名</td><td>删除空目录</td></tr></tbody></table><pre class=" language-shell"><code class="language-shell"># 在删除带有文件的文件夹时需使用rm -f # 递归的方式删除文件夹# ps删库跑路的梗就是这个命令哦</code></pre><h2 id="复制、移动文件及目录命令的使用"><a href="#复制、移动文件及目录命令的使用" class="headerlink" title="复制、移动文件及目录命令的使用"></a>复制、移动文件及目录命令的使用</h2><table><thead><tr><th>命令</th><th>说明</th></tr></thead><tbody><tr><td>cp</td><td>拷贝文件、拷贝目录</td></tr><tr><td>mv</td><td>移动文件、移动目录、重命名</td></tr></tbody></table><pre class=" language-shell"><code class="language-shell">cp "复制文件的路径" "复制到的路径"mv "移动文件的路径" "移动到的路径"mv "文件的旧命名" "新命名"</code></pre><blockquote><ul><li>mkdair的命令选项</li></ul></blockquote></li></ul><table><thead><tr><th>命令选项</th><th>说明</th></tr></thead><tbody><tr><td>-p</td><td>创建依赖的文件夹</td></tr></tbody></table><blockquote><ul><li>rm的命令选项</li></ul></blockquote><table><thead><tr><th>命令选项</th><th>说明</th></tr></thead><tbody><tr><td>-i</td><td>交互式提示</td></tr><tr><td>-r</td><td>递归删除目录及其内容</td></tr><tr><td>-f</td><td>强制删除，忽略不存在的文件，无需提示</td></tr><tr><td>-d</td><td>删除空目录</td></tr></tbody></table><blockquote><ul><li>rm的命令选项</li></ul></blockquote><table><thead><tr><th>命令选项</th><th>说明</th></tr></thead><tbody><tr><td>-i</td><td>交互式提示</td></tr><tr><td>-r</td><td>递归拷贝目录及其内容</td></tr><tr><td>-v</td><td>显示拷贝后的路径描述</td></tr><tr><td>-a</td><td>保留文件的原有权限</td></tr></tbody></table><blockquote><ul><li>mv 命令选项</li></ul></blockquote><table><thead><tr><th>命令选项</th><th>说明</th></tr></thead><tbody><tr><td>-i</td><td>交互式提示</td></tr><tr><td>-v</td><td>显示移动后的路径描述</td></tr></tbody></table>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="2020/11/30/hello-world/"/>
       <url>2020/11/30/hello-world/</url>
