@@ -1167,7 +1167,7 @@ p_change<span class="token punctuation">.</span>max<span class="token punctuatio
 2018-02-22     (0.94, 1.738]
 2018-02-14    (1.738, 2.938]
 Name: p_change, dtype: category
-Categories (10, interval[float64]): [(-10.030999999999999, -4.836] &lt; (-4.836, -2.444] &lt; (-2.444, 
+Categories (10, interval[float64]): [(-10.030999999999999, -4.836] &lt; (-4.836, -2.444] &lt; (-2.444,  
 -1.352] &lt; (-1.352, -0.462] ... (0.94, 1.738] &lt; (1.738, 2.938] &lt; (2.938, 5.27] &lt; (5.27, 10.03]]</code></pre>
 <pre class=" language-python"><code class="language-python">qcut_r <span class="token operator">=</span> pd<span class="token punctuation">.</span>qcut<span class="token punctuation">(</span>p_change<span class="token punctuation">,</span>q<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span></code></pre>
 <pre class=" language-python"><code class="language-python">qcut_r<span class="token punctuation">.</span>value_counts<span class="token punctuation">(</span><span class="token punctuation">)</span></code></pre>
