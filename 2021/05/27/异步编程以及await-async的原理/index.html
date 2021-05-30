@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="friends, 路桥">
+    <meta name="keywords" content="异步编程以及await,async的原理, 路桥">
     <meta name="description" content="少年应当万丈光芒">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>friends | 路桥</title>
+    <title>异步编程以及await,async的原理 | 路桥</title>
     <link rel="icon" type="image/png" href="/medias/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -314,12 +314,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">friends</h1>
+                    <h1 class="description center-align post-title">异步编程以及await,async的原理</h1>
                 </div>
             </div>
         </div>
@@ -433,9 +433,13 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/js-%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B-await-async/">
+                                <span class="chip bg-color">-js -异步编程 -await -async</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
@@ -447,7 +451,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-11-30
+                    2021-05-27
                 </div>
                 
 
@@ -468,7 +472,39 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="了解异步编程以及await-async"><a href="#了解异步编程以及await-async" class="headerlink" title="了解异步编程以及await,async"></a>了解异步编程以及await,async</h1><h2 id="通过一个小例题来引入话题吧"><a href="#通过一个小例题来引入话题吧" class="headerlink" title="通过一个小例题来引入话题吧"></a>通过一个小例题来引入话题吧</h2><pre class=" language-js"><code class="language-js"><span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">0</span>
+<span class="token keyword">let</span> b <span class="token operator">=</span> <span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> <span class="token punctuation">{</span>
+  a <span class="token operator">=</span> a <span class="token operator">+</span> <span class="token keyword">await</span> <span class="token number">10</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'2'</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> '2' 10</span>
+<span class="token punctuation">}</span>
+<span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+a<span class="token operator">++</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span> a<span class="token punctuation">)</span> <span class="token comment" spellcheck="true">// -> '1' 1</span></code></pre>
+<h3 id="代码的执行解析如下"><a href="#代码的执行解析如下" class="headerlink" title="代码的执行解析如下"></a>代码的执行解析如下</h3><blockquote>
+<p> 首先函数 b 先执行，在执行到 await 10 之前变量 a 还是 0，因为 await 内部实现了 generator ，generator 会保留堆栈中东西，所以这时候 a = 0 被保存了下来<br> 因为 await 是异步操作，后来的表达式不返回 Promise 的话，就会包装成 Promise.reslove(返回值)，然后会去执行函数外的同步代码同步代码执行完毕后开始执行异步代码，将保存下来的值拿出来使用，这时候 a = 0 + 10</p>
+</blockquote>
+<h3 id="当我读到这里时就觉的很好奇就为什么是这样的await是如何封装的？"><a href="#当我读到这里时就觉的很好奇就为什么是这样的await是如何封装的？" class="headerlink" title="当我读到这里时就觉的很好奇就为什么是这样的await是如何封装的？"></a>当我读到这里时就觉的很好奇就为什么是这样的await是如何封装的？</h3><blockquote>
+<p>首先我们要知道async函数在声明形式上和普通函数没有区别，函数声明式，函数表达式，对象方法，class方法和箭头函数等都可以声明async函数<br>async函数在声明形式上和普通函数没有区别，函数声明式，函数表达式，对象方法，class方法和箭头函数等都可以声明async函数</p>
+</blockquote>
+<pre class=" language-js"><code class="language-js"><span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">foo</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">{</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">async</span> <span class="token keyword">function</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+  <span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">/</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+  <span class="token keyword">await</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+<span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment" spellcheck="true">// 1</span>
+<span class="token comment" spellcheck="true">// Promise { undefined }</span>
+<span class="token comment" spellcheck="true">// 2</span>
+<span class="token comment" spellcheck="true">// 3</span></code></pre>
+<blockquote>
+<p>而await本质上是一个迭代器（Generator）是迭代器的一种语法糖</p>
+</blockquote>
+
                 
             </div>
             <hr/>
@@ -494,7 +530,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://simonhand.github.io/friends/index.html">https://simonhand.github.io/friends/index.html</a>
+                    <a href="https://simonhand.github.io/2021/05/27/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%BB%A5%E5%8F%8Aawait-async%E7%9A%84%E5%8E%9F%E7%90%86/">https://simonhand.github.io/2021/05/27/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E4%BB%A5%E5%8F%8Aawait-async%E7%9A%84%E5%8E%9F%E7%90%86/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -531,7 +567,11 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/js-%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B-await-async/">
+                                    <span class="chip bg-color">-js -异步编程 -await -async</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -699,18 +739,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2021/05/30/%E7%94%A8vue%E5%86%99%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86%E5%AE%9E%E9%AA%8C/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="用vue写编译原理实验">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">用vue写编译原理实验</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -720,9 +759,9 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-30
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-05-30
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -731,7 +770,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/vue-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">
+                        <span class="chip bg-color">-vue -数据结构 -编译原理</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -739,16 +785,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/friends/index.html">
+                <a href="/2021/05/13/%E9%A1%B9%E7%9B%AE%E5%B0%8F%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="friends">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="项目小记">
                         
-                        <span class="card-title">friends</span>
+                        <span class="card-title">项目小记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -759,7 +805,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-30
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-05-13
                             </span>
                         <span class="publish-author">
                             
@@ -769,7 +815,14 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/1/">
+                        <span class="chip bg-color">1</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
